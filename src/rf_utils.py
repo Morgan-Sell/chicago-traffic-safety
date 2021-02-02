@@ -10,7 +10,7 @@ from sklearn.metrics import mean_squared_error, confusion_matrix, classification
 from sklearn.inspection import permutation_importance
 
 
-def create_sorted_permutation_importance_df(model, X, y, n_iterations, random_state):
+def create_sorted_permutation_importance_df(model, X, y, n_iterations, random_state, features):
     '''
     Inputs:
     Enter a fitted tree-based model, e.g. Random Forest or Gradient Boost.
@@ -25,11 +25,12 @@ def create_sorted_permutation_importance_df(model, X, y, n_iterations, random_st
     results = permutation_importance(model, X, y, n_repeats=n_iterations,
                                      random_state=random_state, n_jobs=-1)
     
-    df = pd.DataFrame(results.importances.T * 100, columns=X.columns)
-    sorted_idx = df.median().sort_values().index[::-1]
-    sorted_df = df[sorted_idx]
-    return sorted_df
-
+    df = pd.DataFrame()
+    df['feature'] = features
+    df['mean_importance'] = results['importances_mean']
+    df['std_importance'] = results['importances_std']
+    df.sort_values(by='mean_importance', axis=0, ascending=False, inplace=True)
+    return df
 
 def plot_horizontal_permutation_importance_boxplot(df, figsize, max_features):
     '''
@@ -41,13 +42,13 @@ def plot_horizontal_permutation_importance_boxplot(df, figsize, max_features):
     
     fig, ax = plt.subplots(figsize=figsize)
     
-    sns.boxplot(data=df2, orient='h', ax=ax, palette='mako')
-    ax.set_xlabel('Importance')
+    sns.barplot(data=df, x='mean_importance', y='feature', ax=ax, palette='mako')
+    ax.set_xlabel('Mean Importance')
     ax.set_title('Permutation Importance', fontsize=18)
     fig.tight_layout();
 
 
-def calculate_and_plot_permutation_importance(model, X, y, n_iterations, random_state, figsize, max_features):
+def calculate_and_plot_permutation_importance(model, X, y, n_iterations, random_state, figsize, max_features, features):
     '''
     Inputs:
     Enter a fitted tree-based model, e.g. Random Forest or Gradient Boost.
@@ -57,5 +58,5 @@ def calculate_and_plot_permutation_importance(model, X, y, n_iterations, random_
     
     Returns a horizontal box plot summarizing each feature's permutation importance.
     '''
-    sorted_df = create_sorted_permutation_importance_df(model, X, y, n_iterations, random_state)
+    sorted_df = create_sorted_permutation_importance_df(model, X, y, n_iterations, random_state, features)
     plot_horizontal_permutation_importance_boxplot(sorted_df, figsize, max_features)
