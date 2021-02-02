@@ -1,11 +1,12 @@
 
 
 FEATURES TO INCLUDE:
-- involved_pedest_cycle
-- was_head_on
-- at_stop_sign_or_traffic_light
-- is_night
-- was_parked
+- is_pedestrian
+- has_stop_sign_or_traffic_light
+- is_parked
+- has_no_controls
+- is_cyclist
+
 
 FEATURES TO OMIT:
 - was_non_functioning_device
