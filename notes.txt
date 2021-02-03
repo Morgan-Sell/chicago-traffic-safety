@@ -6,7 +6,15 @@ FEATURES TO INCLUDE:
 - is_parked
 - has_no_controls
 - is_cyclist
+- is_night
+- 
 
 
 FEATURES TO OMIT:
 - was_non_functioning_device
+- is_reckless_driving
+- is_summer
+- is_spring
+- is_using_cellphone
+- is_non_functioning_device
+- 
