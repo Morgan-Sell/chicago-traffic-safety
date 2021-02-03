@@ -42,7 +42,7 @@ def plot_horizontal_permutation_importance_boxplot(df, figsize, max_features):
     
     fig, ax = plt.subplots(figsize=figsize)
     
-    sns.barplot(data=df, x='mean_importance', y='feature', ax=ax, palette='mako')
+    sns.barplot(data=df, x='mean_importance', y='feature', ax=ax, palette='mako_r')
     ax.set_xlabel('Mean Importance')
     ax.set_title('Permutation Importance', fontsize=18)
     fig.tight_layout();
