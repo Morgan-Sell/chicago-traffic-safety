@@ -1,0 +1,15 @@
+,features,VIF
+0,is_pedestrian,1.062399565916345
+1,is_parked,1.249254807750714
+2,is_clear_weather,1.0841488742872614
+3,POSTED_SPEED_LIMIT,1.1013568026390421
+4,has_no_controls,1.4906453052417121
+5,has_no_physical_divider,1.0523650679529941
+6,is_cyclist,1.0258834917579247
+7,is_head_on,1.012912620844525
+8,is_dark_has_no_lighting,1.0352737541209807
+9,has_snow_ice_on_road,1.082689859769059
+10,is_no_sunlight,1.0534040837311414
+11,is_improper_backing,1.0459726243590277
+12,is_intersection_related_involve,1.487901702367479
+13,has_disregarded_traffic_devices,1.112681439854371
